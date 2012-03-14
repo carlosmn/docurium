@@ -153,6 +153,10 @@ $(function() {
       }
       content.append(retdiv)
 
+      if (fdata[fname]['deprecated']) {
+        content.append($('<div>').addClass('example').append('DEPRECATED: ' + fdata[fname]['deprecated']))
+      }
+
       // Show Non-Parsed Function Comments
       if (fdata[fname]['comments']) {
         content.append($('<pre>').append(fdata[fname]['comments']))

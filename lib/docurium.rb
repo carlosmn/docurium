@@ -491,6 +491,12 @@ class Docurium
           comments = comment_lines.join("\n\n").strip
         end
 
+        deprecated_comment = ''
+        comments.gsub!(/\@deprecated ([^@]*)/m) do |m|
+          deprecated_comment = $1.gsub("\n", ' ').gsub("\t", ' ').strip
+          ''
+        end
+
         next if fun == 'defined'
         @data[:functions][fun] = {
           :description => desc,
@@ -501,6 +507,7 @@ class Docurium
           :line => block[:line],
           :lineto => block[:lineto],
           :comments => comments,
+          :deprecated => deprecated_comment,
           :sig => sig,
           :rawComments => rawComments
         }
